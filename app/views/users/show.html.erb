@@ -1,0 +1,22 @@
+<% links = [[t('views.users.back_to_users'), users_path]] %>
+<%= render 'shared/main', title: User.name, links: do %>
+  <%= render 'shared/card' do %>
+    <% if @model.present? %>
+      <div class="mx-auto">
+        <%= render @model %>
+
+        <%= link_to t('views.users.edit_this_user'), edit_user_path(@model), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <div class="inline-block ml-2">
+          <%= button_to t('views.users.destroy_this_user'), user_path(@model), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+        </div>
+      </div>
+    <% else %>
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900"><%= t('views.users.user_not_found') %></h3>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

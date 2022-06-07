@@ -1,0 +1,24 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    command: redis-server
+  postgres:
+    image: postgres
+    volumes:
+      - ./tmp/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+  web:
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - LOCAL=docker
+    build: .
+    volumes:
+      - .:/api
+    ports:
+      - "3000:3000"

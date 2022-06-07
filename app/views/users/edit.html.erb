@@ -1,0 +1,10 @@
+<%= render 'shared/main', title: User.name do %>
+  <%= render 'shared/card' do %>
+
+    <div class="mx-auto md:w-2/3 w-full">
+      <% links = [[t('views.users.show_this_user'), @model], [t('views.users.back_to_users'), users_path]] %>
+      <%= render "form", user: @model, links: %>
+    </div>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,6 @@
+<%= render 'shared/main', title: t('views.users.index.new_user') do %>
+  <%= render 'shared/card' do %>
+    <% links = [[t('views.users.back_to_users'), users_path]] %>
+    <%= render "form", user: @model, links: %>
+  <% end %>
+<% end %>

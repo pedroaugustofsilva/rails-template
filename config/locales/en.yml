@@ -1,0 +1,48 @@
+en:
+  controllers:
+    notices:
+      created: "%{name} was successfully created."
+      updated: "%{name} was successfully updated"
+      destroyed: "%{name} was successfully destroyed"
+  views:
+    actions:
+      edit: "Edit"
+      show: "Show"
+      destroy: "Destroy"
+    shared:
+      nav:
+        sign_out: "Sign out"
+        edit_profile: "Edit profile"
+    generic:
+      previous: "Previous"
+      next: "Next"
+      form_errors: "prohibited this from being saved"
+      change: "Change"
+    sessions:
+      forgot_password_question: "Forgot your password?"
+      new:
+        sign_in_to_your_account: "Sign in to your account"
+        sign_up: "Sign up"
+        or: "Or"
+        sign_in: "Sign in"
+    log_in: "Log in"
+    passwords:
+      new:
+        recover: "Recover"
+      edit:
+        change_your_password: "Change your password"
+        characters: "characters minimum"
+        new_password: "New password"
+        repeat_new_password: "Repeat the password"
+        change_password: "Change password"
+    users:
+      index:
+        new_user: "New user"
+      back_to_users: "Back to users"
+      show_this_user: "Show this user"
+      edit_this_user: "Edit this user"
+      destroy_this_user: "Destroy this user"
+      profile: "Profile"
+      profile_information: "Uses personal information. These information is public."
+      never_share_password: "Never share your password."
+      user_not_found: "User not found"

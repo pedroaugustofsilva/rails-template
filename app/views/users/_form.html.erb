@@ -1,0 +1,88 @@
+<%= form_with(model: user, class: "contents") do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg my-3">
+      <h2><%= "#{pluralize(user.errors.count, "error")} #{t('views.generic.form_errors')}" %></h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900"><%= t('views.users.profile') %></h3>
+        <p class="mt-1 text-sm text-gray-600"><%= t('views.users.profile_information') %></p>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <div class="shadow sm:rounded-md sm:overflow-hidden">
+        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+          <div class="col-span-6 sm:col-span-4">
+            <%= form.label :email, class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.text_field :email, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+          </div>
+
+          <div data-controller="user-photo toggle">
+            <%= form.label :photo, class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.file_field :photo, class: 'hidden', accept: 'image/png,image/jpg,image/jpeg',
+                                data: { action: 'user-photo#changePhotoPreview', 'user-photo-target': 'photoFileField' }  %>
+            <div class="mt-1 flex items-center">
+              <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 <%= photo_url(user).empty? ? '' : 'hidden' %>"
+                    data-user-photo-target="defaultImage">
+                <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </span>
+
+              <img data-user-photo-target="photoPreview"
+                   class="bg-current rounded-full h-12 w-12 <%= photo_url(user).empty? ? 'hidden' : '' %>" src="<%= photo_url(user) %>" />
+
+              <button type="button" data-action="user-photo#selectNewPhoto"
+                      class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <%= t('views.generic.change') %>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="hidden sm:block" aria-hidden="true">
+    <div class="py-5">
+      <div class="border-t border-gray-200"></div>
+    </div>
+  </div>
+  <div class="md:grid md:grid-cols-3 md:gap-6 mt-5 sm:mt-0">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900"><%= User.human_attribute_name(:password) %></h3>
+        <p class="mt-1 text-sm text-gray-600"><%= t('views.users.never_share_password') %></p>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <div class="shadow sm:rounded-md sm:overflow-hidden">
+        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+          <div class="col-span-6 sm:col-span-4">
+            <%= form.label :password, class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.password_field :password, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 py-3 text-right">
+    <% if defined? links %>
+      <% links.each do |(text, link)| %>
+        <%= link_to text, link, class: 'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+      <% end %>
+    <% end %>
+
+    <%= form.submit class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 hover:cursor-pointer" %>
+  </div>
+<% end %>
