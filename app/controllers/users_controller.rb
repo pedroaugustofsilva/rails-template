@@ -13,8 +13,10 @@ class UsersController < ApplicationController
   def show
     run GenericConcept::Operation::Show, params: find_param, 'model.class': User do |ctx|
       @model = ctx[:model]
-      return render :show, status: @model.present? ? :ok : :not_found
+      return render
     end
+
+    render :show, status: :not_found
   end
 
   def create

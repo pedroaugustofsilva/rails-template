@@ -43,10 +43,10 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template('users/show')
     end
 
-    # it 'return 404 with invalid user id' do
-    #   get user_url('invalid user id')
-    #   expect(response).to have_http_status :not_found
-    # end
+    it 'return 404 with invalid user id' do
+      get user_url('invalid user id')
+      expect(response).to have_http_status :not_found
+    end
   end
 
   describe 'POST /create' do
